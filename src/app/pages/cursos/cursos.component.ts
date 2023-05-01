@@ -21,7 +21,7 @@ export class CursosComponent implements OnInit {
     private activatesRoute: ActivatedRoute,
     private cursosService: CursosService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   abrirDetallesCurso(cursoId: number): void {
     this.router.navigate([cursoId], {
@@ -42,11 +42,11 @@ export class CursosComponent implements OnInit {
     const dialog = this.dialog.open(AbmCursosComponent);
 
     dialog.afterClosed()
-    .subscribe((formValue) => {
-    if (formValue) {
-      this.cursosService.crearCurso(formValue)
-    }
-    });
+      .subscribe((formValue) => {
+        if (formValue) {
+          this.cursosService.crearCurso(formValue)
+        }
+      });
   }
 
   editarCurso(curso: Curso): void {
@@ -57,16 +57,16 @@ export class CursosComponent implements OnInit {
     })
 
     dialog.afterClosed()
-    .subscribe((formValue) => {
-      if (formValue) {
-        this.cursosService.editarCurso(curso.id, formValue);
-      }
-    })
+      .subscribe((formValue) => {
+        if (formValue) {
+          this.cursosService.editarCurso(curso.id, formValue);
+        }
+      })
   }
 
   eliminarCurso(curso: Curso): void {
     if (confirm('Esta Seguro?'))
- this.cursosService.eliminarCurso(curso.id);
+      this.cursosService.eliminarCurso(curso.id);
   }
 
   aplicarFiltros(ev: Event): void {

@@ -6,7 +6,7 @@ import { AlumnosComponent } from './pages/alumnos/alumnos.component';
 import { CursosComponent } from './pages/cursos/cursos.component';
 import { InscripcionesComponent } from './pages/inscripciones/inscripciones.component';
 import { DetallesAlumnosComponent } from './pages/alumnos/detalles-alumnos/detalles-alumnos.component';
-import { DetallesCursosComponent } from './pages/cursos/detalles-cursos/detalles-cursos/detalles-cursos.component';
+import { DetallesCursosComponent } from './pages/cursos/detalles-cursos/detalles-cursos.component';
 
 const routes: Routes = [
   {

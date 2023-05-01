@@ -12,5 +12,5 @@ export class HoraComponent {
 
   constructor(private timeService: TimeService) {
     this.horaActual$ = this.timeService.reloj;
- }
+  }
 }

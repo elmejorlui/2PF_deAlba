@@ -9,14 +9,14 @@ export class AlumnosService {
 
   private estudiantes$ = new BehaviorSubject<Alumno[]>([
     {
-      id:1,
+      id: 1,
       nombre: 'Kilian',
       apellido: 'Diez',
       correo: 'Kilian@mail.com',
       curso: 'Angular',
       pais: 'Argentina',
       fecha_registro: new Date(),
-      acciones:'hola'
+      acciones: 'hola'
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ export class AlumnosService {
       curso: 'Angular',
       pais: 'Argentina',
       fecha_registro: new Date(),
-      acciones:'hola'
+      acciones: 'hola'
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ export class AlumnosService {
       curso: 'Angular',
       pais: 'Argentina',
       fecha_registro: new Date(),
-      acciones:'hola'
+      acciones: 'hola'
     },
   ])
 
@@ -46,11 +46,11 @@ export class AlumnosService {
     return this.estudiantes$.asObservable();
   }
 
-  obtenerAlumnoPorId(id: number): Observable<Alumno | undefined>{
+  obtenerAlumnoPorId(id: number): Observable<Alumno | undefined> {
     return this.estudiantes$.asObservable()
-    .pipe(
-      map((alumnos) => alumnos.find((a) => a.id === id))
-    )
+      .pipe(
+        map((alumnos) => alumnos.find((a) => a.id === id))
+      )
   }
 
 }

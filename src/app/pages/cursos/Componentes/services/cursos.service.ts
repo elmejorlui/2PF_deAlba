@@ -29,19 +29,19 @@ const CURSOS_MOCKS: Curso[] = [
 export class CursosService {
   private cursos$ = new BehaviorSubject<Curso[]>([]);
 
-  constructor() {}
+  constructor() { }
 
   obtenerCursos(): Observable<Curso[]> {
     this.cursos$.next(CURSOS_MOCKS);
     return this.cursos$.asObservable();
   }
 
-getCursoById(cursoId: number): Observable<Curso | undefined> {
-  return this.cursos$.asObservable()
-  .pipe(
-    map((cursos) => cursos.find((c) => c.id === cursoId))
-  )
-}
+  getCursoById(cursoId: number): Observable<Curso | undefined> {
+    return this.cursos$.asObservable()
+      .pipe(
+        map((cursos) => cursos.find((c) => c.id === cursoId))
+      )
+  }
 
   crearCurso(payload: CrearCursoPayload): Observable<Curso[]> {
     this.cursos$.pipe(take(1)).subscribe({
@@ -80,20 +80,20 @@ getCursoById(cursoId: number): Observable<Curso | undefined> {
     return this.cursos$.asObservable();
   }
 
-eliminarCurso(cursoId: number): Observable<Curso[]> {
-  this.cursos$
-  .pipe
-  (
-    take(1)
-    )
-    .subscribe({
-      next: (cursos) => {
-        const cursosActualizados = cursos.filter((curso) => curso.id !== cursoId)
-      this.cursos$.next(cursosActualizados);
-    },
-  });
-  return this.cursos$.asObservable();
-}
+  eliminarCurso(cursoId: number): Observable<Curso[]> {
+    this.cursos$
+      .pipe
+      (
+        take(1)
+      )
+      .subscribe({
+        next: (cursos) => {
+          const cursosActualizados = cursos.filter((curso) => curso.id !== cursoId)
+          this.cursos$.next(cursosActualizados);
+        },
+      });
+    return this.cursos$.asObservable();
+  }
 
 
 

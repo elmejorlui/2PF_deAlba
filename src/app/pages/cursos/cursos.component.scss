@@ -2,16 +2,29 @@
   max-width: 400px;
 }
 
-.titulo_margin{
+.titulo_margin {
   margin: 10px 10px 10px 0px;
 }
 
-.button_margin{
+.button_margin {
   margin: 10px 10px 0px 0px;
 }
 
-.photo_perfil{
+.photo_perfil {
   margin: 5px 5px 0 20%;
 }
 
+table {
+  width: 100%;
+}
 
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+
+.addButton {
+  margin-bottom: 17px;
+}

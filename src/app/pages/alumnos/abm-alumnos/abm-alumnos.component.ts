@@ -11,37 +11,37 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class AbmAlumnosComponent {
 
   nombreControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(3),
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3),
+    ]
   );
 
   apellidoControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(3)
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   );
 
   emailControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.email
-  ]
+    [
+      Validators.required,
+      Validators.email
+    ]
   );
 
   cursoControl = new FormControl('',
-  [
-    Validators.required,
-  ]
+    [
+      Validators.required,
+    ]
   );
 
   paisControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(3)
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   );
 
   alumnoForms = new FormGroup({
@@ -55,18 +55,18 @@ export class AbmAlumnosComponent {
   constructor(
     private dialogRef: MatDialogRef<AbmAlumnosComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    ) {
-      if (data) {
-        this.nombreControl.setValue(data.alumnoParaEditar.nombre);
-        this.apellidoControl.setValue(data.alumnoParaEditar.apellido);
-        this.emailControl.setValue(data.alumnoParaEditar.correo);
-        this.cursoControl.setValue(data.alumnoParaEditar.curso);
-        this.paisControl.setValue(data.alumnoParaEditar.pais);
-      }
+  ) {
+    if (data) {
+      this.nombreControl.setValue(data.alumnoParaEditar.nombre);
+      this.apellidoControl.setValue(data.alumnoParaEditar.apellido);
+      this.emailControl.setValue(data.alumnoParaEditar.correo);
+      this.cursoControl.setValue(data.alumnoParaEditar.curso);
+      this.paisControl.setValue(data.alumnoParaEditar.pais);
     }
+  }
 
-  guardar():void {
-    if (this.alumnoForms.valid){
+  guardar(): void {
+    if (this.alumnoForms.valid) {
       this.dialogRef.close(this.alumnoForms.value)
     } else {
       this.alumnoForms.markAllAsTouched();

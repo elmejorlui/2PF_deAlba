@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CursosService } from '../../Componentes/services/cursos.service';
-import { Curso } from '../../Componentes/models/index';
 import { Subject, takeUntil } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { Curso } from '../Componentes/models';
+import { CursosService } from '../Componentes/services/cursos.service';
 
 @Component({
   selector: 'app-detalles-cursos',
@@ -12,20 +12,20 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DetallesCursosComponent implements OnDestroy {
 
-  curso: Curso | undefined ;
+  curso: Curso | undefined;
 
   private destroyed$ = new Subject()
   dataSource = new MatTableDataSource<Curso>();
 
-   constructor(
+  constructor(
     private activatedRoute: ActivatedRoute,
     private cursoServices: CursosService,
-   ) {
-  this.cursoServices.getCursoById(parseInt(this.activatedRoute.snapshot.params['id']))
-  .pipe(takeUntil(this.destroyed$))
-  .subscribe((cursos) => this.curso = cursos);
-   }
-    ngOnDestroy(): void {
-      this.destroyed$.next(true)
-    }
+  ) {
+    this.cursoServices.getCursoById(parseInt(this.activatedRoute.snapshot.params['id']))
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((cursos) => this.curso = cursos);
+  }
+  ngOnDestroy(): void {
+    this.destroyed$.next(true)
+  }
 }

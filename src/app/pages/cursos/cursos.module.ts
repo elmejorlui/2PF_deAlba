@@ -13,12 +13,9 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { AbmCursosComponent } from './abm-cursos/abm-cursos.component';
 import { CursosComponent } from './cursos.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { DetallesCursosComponent } from './detalles-cursos/detalles-cursos/detalles-cursos.component';
-import {MatCardModule} from '@angular/material/card';
-
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DetallesCursosComponent } from './detalles-cursos/detalles-cursos.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -44,7 +41,7 @@ import {MatCardModule} from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule
-  ],exports: [
+  ], exports: [
     CursosComponent
   ]
 

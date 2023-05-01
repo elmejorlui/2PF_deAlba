@@ -33,8 +33,6 @@ import { MatListModule } from '@angular/material/list'
     CursosModule,
     InscripcionesModule,
     MatListModule
-
-
   ],
   exports: [
     DashboardComponent,

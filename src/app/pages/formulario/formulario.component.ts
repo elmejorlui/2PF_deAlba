@@ -1,6 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import {  FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -10,37 +10,37 @@ import {  FormControl, FormGroup, Validators } from '@angular/forms';
 export class FormularioComponent {
 
   nombreControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(3),
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3),
+    ]
   );
 
   apellidoControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(5)
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   );
 
   emailControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.email
-  ]
+    [
+      Validators.required,
+      Validators.email
+    ]
   );
 
   cursoControl = new FormControl('',
-  [
-    Validators.required,
-  ]
+    [
+      Validators.required,
+    ]
   );
 
   paisControl = new FormControl('',
-  [
-    Validators.required,
-    Validators.minLength(5)
-  ]
+    [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   );
 
   alumnoForms = new FormGroup({
@@ -51,9 +51,9 @@ export class FormularioComponent {
     pais: this.paisControl
   })
 
-  constructor(private dialogRef: DialogRef) {}
+  constructor(private dialogRef: DialogRef) { }
 
-  guardar():void {
+  guardar(): void {
     this.dialogRef.close(this.alumnoForms.value)
   }
 

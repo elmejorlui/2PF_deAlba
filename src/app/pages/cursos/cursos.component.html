@@ -1,9 +1,7 @@
-<div class="mb-3">
-  <button (click)="crearCurso()" mat-flat-button color="primary">
-    <mat-icon>add</mat-icon>
-    Agregar Curso
-  </button>
-</div>
+<button class="addButton" (click)="crearCurso()" mat-flat-button color="primary">
+  <mat-icon>add</mat-icon>
+  Agregar Curso
+</button>
 
 <mat-form-field class="w-full">
   <mat-label>Buscar</mat-label>
@@ -13,43 +11,43 @@
 
 <table mat-table [dataSource]="dataSource">
 
-<ng-container matColumnDef="id">
-  <th mat-header-cell *matHeaderCellDef appFontSize>Id</th>
-  <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
-</ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef appFontSize>Id</th>
+    <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
+  </ng-container>
 
-<ng-container matColumnDef="nombre">
-  <th mat-header-cell *matHeaderCellDef appFontSize> Nombre Del Curso</th>
-  <td mat-cell *matCellDef="let curso">
-    {{ curso.nombre }}
-  </td>
-</ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Nombre Del Curso</th>
+    <td mat-cell *matCellDef="let curso">
+      {{ curso.nombre }}
+    </td>
+  </ng-container>
 
-<ng-container matColumnDef="fecha_inicio" >fecha de inicio
-  <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de Inicio </th>
-  <td mat-cell *matCellDef="let curso"> {{curso.fecha_inicio | date: 'dd/MM/YYYY'}} </td>
-</ng-container>
+  <ng-container matColumnDef="fecha_inicio">fecha de inicio
+    <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de Inicio </th>
+    <td mat-cell *matCellDef="let curso"> {{curso.fecha_inicio | date: 'dd/MM/YYYY'}} </td>
+  </ng-container>
 
-<ng-container matColumnDef="fecha_fin" >fecha de fin
-  <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de Fin </th>
-  <td mat-cell *matCellDef="let curso"> {{curso.fecha_fin | date: 'dd/MM/YYYY'}} </td>
-</ng-container>
+  <ng-container matColumnDef="fecha_fin">fecha de fin
+    <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de Fin </th>
+    <td mat-cell *matCellDef="let curso"> {{curso.fecha_fin | date: 'dd/MM/YYYY'}} </td>
+  </ng-container>
 
-<ng-container matColumnDef="acciones" >acciones
-  <th mat-header-cell *matHeaderCellDef appFontSize> acciones </th>
-  <td mat-cell *matCellDef="let curso">
-    <button (click)="editarCurso(curso)" mat-icon-button >
-      <mat-icon >edit</mat-icon>
-    </button>
-    <button  mat-icon-button (click)="eliminarCurso(curso)">
-      <mat-icon >delete</mat-icon>
-    </button>
-    <button  mat-icon-button (click)="abrirDetallesCurso(curso.id)">
-      <mat-icon >school</mat-icon>
-    </button>
-  </td>
-</ng-container>
+  <ng-container matColumnDef="acciones">acciones
+    <th mat-header-cell *matHeaderCellDef appFontSize> acciones </th>
+    <td mat-cell *matCellDef="let curso">
+      <button (click)="editarCurso(curso)" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="eliminarCurso(curso)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button (click)="abrirDetallesCurso(curso.id)">
+        <mat-icon>school</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
-<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
