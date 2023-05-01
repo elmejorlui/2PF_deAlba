@@ -18,6 +18,22 @@ export class InscripcionesService {
             fecha_inicio: new Date(),
         },
         {
+            id: 1,
+            alumnoId: 1,
+            cursoId: 2,
+            alumno: 'Kilian',
+            curso: 'React',
+            fecha_inicio: new Date(),
+        },
+        {
+            id: 1,
+            alumnoId: 1,
+            cursoId: 3,
+            alumno: 'Kilian',
+            curso: 'Android',
+            fecha_inicio: new Date(),
+        },
+        {
             id: 2,
             alumnoId: 2,
             cursoId: 2,

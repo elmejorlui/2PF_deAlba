@@ -1,3 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Detalles Alumnos</mat-card-title>
+    <img class="photo_perfil" mat-card-sm-image
+      src="https://ionicframework.com/docs/img/demos/avatar.svg">
+    <mat-card-subtitle class="titulo_margin">{{alumno?.nombre}} {{alumno?.apellido}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card-subtitle>Correo</mat-card-subtitle>
+    <p>{{alumno?.correo}}</p>
+    <mat-card-subtitle>Pais</mat-card-subtitle>
+    <p>{{alumno?.pais}}</p>
+    <mat-card-subtitle>Fecha Inscripcion</mat-card-subtitle>
+    <p>{{alumno?.fecha_registro}}</p>
+  </mat-card-content>
+</mat-card>
+
 <mat-form-field>
   <mat-label>Buscar</mat-label>
   <input matInput (keyup)="aplicarFiltros($event)" placeholder="Ex. Mia" #input>
