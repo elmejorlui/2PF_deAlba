@@ -1,0 +1,104 @@
+<h1 mat-dialog-title>ABM Alumnos</h1>
+<div mat-dialog-content>
+  <form class="formulario-alumnos">
+    <table class="width" cellspacing="0">
+      <td>
+          <mat-form-field class="width">
+            <mat-label>Nombre</mat-label>
+            <input matInput
+            [ngClass]="{ 'is-invalid': nombreControl.invalid && nombreControl.touched}"
+            [formControl]="nombreControl"
+            class="form-control"
+            />
+            <div
+            *ngIf="nombreControl.hasError('required') && nombreControl.touched"
+            class="invalid-feedback">
+            Este campo es obligatorio
+            </div>
+          </mat-form-field>
+        </td>
+
+
+          <mat-form-field class="width">
+            <mat-label>Apellido</mat-label>
+            <input matInput
+            [ngClass]="{ 'is-invalid': nombreControl.invalid && nombreControl.touched}"
+            [formControl]="apellidoControl"
+            class="form-control"
+            />
+            <div
+      *ngIf="apellidoControl.hasError('required') && apellidoControl.touched"
+      class="invalid-feedback">
+      Este campo es obligatorio
+      </div>
+          </mat-form-field>
+    </table>
+
+    <table class="width" cellspacing="0">
+      <td>
+        <mat-form-field class="width">
+          <mat-label>Correo</mat-label>
+          <input matInput
+          [ngClass]="{ 'is-invalid': emailControl.invalid && emailControl.touched}"
+            [formControl]="emailControl"
+            class="form-control"
+          />
+          <div
+      *ngIf="emailControl.hasError('required') && emailControl.touched"
+      class="invalid-feedback">
+      Este campo es obligatorio
+      </div>
+        </mat-form-field>
+      </td>
+    </table>
+
+    <table class="width" cellspacing="0">
+      <td>
+        <mat-form-field class="width">
+          <mat-label>Selecciona tu curso </mat-label>
+          <mat-select
+          multiple
+          [ngClass]="{ 'is-invalid': nombreControl.invalid && nombreControl.touched}"
+            [formControl]="cursoControl"
+            class="form-control"
+          >
+            <mat-option value="Angular">Angular</mat-option>
+            <mat-option value="React">React</mat-option>
+            <mat-option value="Asado Profecional">Asado Profecional</mat-option>
+          </mat-select>
+          <div
+          *ngIf="cursoControl.hasError('required') && cursoControl.touched"
+          class="invalid-feedback">
+          Este campo es obligatorio
+          </div>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="width">
+          <mat-label>Pais </mat-label>
+          <input matInput
+          [ngClass]="{ 'is-invalid': paisControl.invalid && paisControl.touched}"
+            [formControl]="paisControl"
+            class="form-control"
+          >
+          <div
+          *ngIf="paisControl.hasError('required') && paisControl.touched"
+          class="invalid-feedback">
+          Este campo es obligatorio
+          </div>
+        </mat-form-field>
+      </td>
+    </table>
+  </form>
+
+  <div mat-dialog-action >
+    <button mat-dialog-close class="button-row" mat-raised-button color="warn">Cancelar</button>
+    <button (click)="guardar()" class="button-row" mat-raised-button color="primary" >Guardar</button>
+  </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,63 @@
+<button class="addButton" (click)="abrirABMalumnos()" mat-flat-button color="primary">
+  <mat-icon>add</mat-icon>
+  Agregar Alumnos
+</button>
+
+<mat-form-field>
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="aplicarFiltros($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef appFontSize>Id</th>
+      <td mat-cell *matCellDef="let alumnos"> {{alumnos.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreCompleto">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Nombre Completo</th>
+      <td mat-cell *matCellDef="let alumnos">
+        {{alumnos | nombreCompleto: 'mayusculas' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Correo </th>
+      <td mat-cell *matCellDef="let alumnos">
+        {{alumnos.correo}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pais">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Pais </th>
+      <td mat-cell *matCellDef="let alumnos">
+        {{alumnos.pais }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_registro">fecha de registro
+      <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de Registro </th>
+      <td mat-cell *matCellDef="let alumnos"> {{alumnos.fecha_registro | date: 'dd/MM/YYYY'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">acciones
+      <th mat-header-cell *matHeaderCellDef appFontSize> Acciones </th>
+      <td mat-cell *matCellDef="let alumnos">
+        <button (click)="actualizarAlumno(alumnos)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteAlumno(alumnos)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="irAlDetalle(alumnos.id)">
+          <mat-icon>school</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

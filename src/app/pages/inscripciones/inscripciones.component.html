@@ -1,0 +1,32 @@
+<mat-form-field class="w-full">
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="aplicarFiltros($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef appFontSize>Id</th>
+    <td mat-cell *matCellDef="let inscripciones"> {{inscripciones.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="alumno">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Alumno </th>
+    <td mat-cell *matCellDef="let inscripciones"> {{inscripciones.alumno}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="curso">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Curso </th>
+    <td mat-cell *matCellDef="let inscripciones"> {{inscripciones.curso}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha_inicio">fecha de inicio
+    <th mat-header-cell *matHeaderCellDef appFontSize> Fecha de inicio </th>
+    <td mat-cell *matCellDef="let inscripciones"> {{inscripciones.fecha_inicio | date: 'dd/MM/YYYY'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

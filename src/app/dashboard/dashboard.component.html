@@ -1,0 +1,43 @@
+<mat-drawer-container class="example-container" autosize>
+  <!--Siderbar-->
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <img class="photo" mat-card-sm-image src="https://uploads.turbologo.com/uploads/design/hq_preview_image/472636/draw_svg20210830-31526-9wr9ip.svg.png" >
+    <p></p>
+    <mat-nav-list>
+      <a
+        [routerLink]="link.path"
+        mat-list-item
+        *ngFor="let link of links"
+        >
+          <mat-icon >{{link.icon}}</mat-icon> {{ link.title }}
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!--Mi Wrapper-->
+  <div class="example-sidenav-content">
+
+    <!--Toolbar-->
+
+    <mat-toolbar color="primary">
+      <button
+        (click)="drawer.toggle()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon >menu</mat-icon>
+      </button>
+      <span appFontSize>CODERHOUSE</span>
+      <span class="example-spacer"></span>
+      <app-hora></app-hora>
+    </mat-toolbar>
+
+    <!--Mis paginas-->
+    <main>
+
+      <router-outlet></router-outlet>
+
+    </main>
+  </div>
+</mat-drawer-container>
