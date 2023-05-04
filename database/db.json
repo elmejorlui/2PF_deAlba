@@ -1,0 +1,22 @@
+{
+    "usuarios": [
+      {
+        "id": 1,
+        "nombre": "Luis",
+        "apellido": "de Alba",
+        "email": "luism@mail.com",
+        "password": "123456",
+        "token": "hjsdfJHFDSAFMsaDsan12sdanjjadashj3FDBEWH",
+        "role": "admin"
+      },
+      {
+        "id": 4,
+        "nombre": "Ariana",
+        "apellido": "Grande",
+        "email": "arig@email.com",
+        "password": "123456",
+        "token": "nmdsgfjhuMDKSAFJASDK327SJDKANjsadnsah",
+        "role": "user"
+      }
+    ]
+  }

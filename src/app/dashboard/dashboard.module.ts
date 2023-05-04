@@ -5,14 +5,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AlumnosModule } from '../pages/alumnos/alumnos.module';
 import { SharedModule } from '../shared/shared.module';
-import { FormularioModule } from '../pages/formulario/formulario.module';
 import { HoraComponent } from './hora/hora.component';
-import { CursosModule } from '../pages/cursos/cursos.module';
-import { InscripcionesModule } from '../pages/inscripciones/inscripciones.module';
 import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list'
+import { AlumnosModule } from './pages/alumnos/alumnos.module';
+import { FormularioModule } from './pages/formulario/formulario.module';
+import { InscripcionesModule } from './pages/inscripciones/inscripciones.module';
+import { CursosModule } from './pages/cursos/cursos.module';
 
 
 @NgModule({
