@@ -15,11 +15,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DetallesAlumnosComponent } from './detalles-alumnos/detalles-alumnos.component';
 import { MatCardModule } from '@angular/material/card';
-
-
-
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -42,12 +38,20 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatOptionModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: AlumnosComponent
+      },
+      {
+        path: ':id',
+        component: DetallesAlumnosComponent,
+      },
+    ]),
   ],
   exports: [
     AlumnosComponent
-
-
   ]
 })
 export class AlumnosModule { }

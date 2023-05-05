@@ -6,7 +6,10 @@
     <p></p>
     <mat-nav-list>
       <a [routerLink]="link.path" mat-list-item *ngFor="let link of links">
-        <mat-icon>{{link.icon}}</mat-icon> {{ link.title }}
+        <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon> {{ link.title }}
+      </a>
+      <a (click)="logout()" mat-list-item>
+        Cerrar sesión
       </a>
     </mat-nav-list>
   </mat-drawer>
@@ -24,13 +27,12 @@
       <span appFontSize>CODERHOUSE</span>
       <span class="example-spacer"></span>
       <app-hora></app-hora>
+      <p>{{ (authUser$ | async)?.nombre }}</p>
     </mat-toolbar>
 
     <!--Mis paginas-->
     <main>
-
-      <router-outlet></router-outlet>
-
+      <router-outlet />
     </main>
   </div>
 </mat-drawer-container>

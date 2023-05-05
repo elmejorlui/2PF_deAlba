@@ -5,14 +5,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { SharedModule } from '../shared/shared.module';
 import { HoraComponent } from './hora/hora.component';
 import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list'
-import { AlumnosModule } from './pages/alumnos/alumnos.module';
-import { FormularioModule } from './pages/formulario/formulario.module';
-import { InscripcionesModule } from './pages/inscripciones/inscripciones.module';
-import { CursosModule } from './pages/cursos/cursos.module';
 
 
 @NgModule({
@@ -22,17 +17,25 @@ import { CursosModule } from './pages/cursos/cursos.module';
   ],
   imports: [
     CommonModule,
-    RouterModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    AlumnosModule,
-    SharedModule,
-    FormularioModule,
-    CursosModule,
-    InscripcionesModule,
-    MatListModule
+    MatListModule,
+    RouterModule.forChild([
+      {
+        path: 'estudiantes',
+        loadChildren: () => import('./pages/alumnos/alumnos.module').then((m) => m.AlumnosModule)
+      },
+      {
+        path: 'cursos',
+        loadChildren: () => import('./pages/cursos/cursos.module').then((m) => m.CursosModule),
+      },
+      {
+        path: 'inscripciones',
+        loadChildren: () => import('./pages/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
+      }
+    ])
   ],
   exports: [
     DashboardComponent,

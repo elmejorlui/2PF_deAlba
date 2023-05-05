@@ -16,6 +16,7 @@ import { CursosComponent } from './cursos.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DetallesCursosComponent } from './detalles-cursos/detalles-cursos.component';
 import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,17 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: CursosComponent
+      },
+      {
+        path: ':id',
+        component: DetallesCursosComponent,
+      },
+    ]),
   ], exports: [
     CursosComponent
   ]
