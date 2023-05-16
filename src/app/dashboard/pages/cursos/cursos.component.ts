@@ -5,6 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AbmCursosComponent } from './abm-cursos/abm-cursos.component';
 import { Curso } from './Componentes/models/index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Usuario } from 'src/app/core/models';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,13 +18,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CursosComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns = ['id', 'nombre', 'fecha_inicio', 'fecha_fin', 'acciones'];
+  authUser$: Observable<Usuario | null>;
 
   constructor(
     private router: Router,
     private activatesRoute: ActivatedRoute,
     private cursosService: CursosService,
     private dialog: MatDialog,
+    private authService: AuthService
   ) {
+    this.authUser$ = this.authService.obtenerUsuarioAutenticado();
   }
 
   abrirDetallesCurso(cursoId: number): void {

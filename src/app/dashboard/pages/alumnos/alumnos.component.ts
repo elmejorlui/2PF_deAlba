@@ -6,6 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from '../alumnos/componentes/models/index';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/environments/environments';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Usuario } from 'src/app/core/models';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -14,6 +17,8 @@ import { enviroment } from 'src/environments/environments';
   styleUrls: ['./alumnos.component.scss']
 })
 export class AlumnosComponent {
+
+  authUser$: Observable<Usuario | null>;
 
   dataSource = new MatTableDataSource<Alumno>();
 
@@ -27,8 +32,11 @@ export class AlumnosComponent {
   constructor(private matDialog: MatDialog,
     private router: Router,
     private activatesRoute: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
+
+    this.authUser$ = this.authService.obtenerUsuarioAutenticado();
 
     this.http.get<Alumno[]>(`${enviroment.apiBaseUrl}/alumnos`)
       .subscribe((alumnos) => {
