@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { CrearCursoPayload, Curso } from '../models';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/environments/environments';
 
 const CURSOS_MOCKS: Curso[] = [
   {
@@ -29,11 +31,10 @@ const CURSOS_MOCKS: Curso[] = [
 export class CursosService {
   private cursos$ = new BehaviorSubject<Curso[]>([]);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   obtenerCursos(): Observable<Curso[]> {
-    this.cursos$.next(CURSOS_MOCKS);
-    return this.cursos$.asObservable();
+    return this.http.get<Curso[]>(`${enviroment.apiBaseUrl}/cursos`)
   }
 
   getCursoById(cursoId: number): Observable<Curso | undefined> {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Inscripciones } from '../models/index';
 import { BehaviorSubject, Observable, map, } from 'rxjs';
+import { enviroment } from 'src/environments/environments';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -83,10 +85,10 @@ export class InscripcionesService {
           },
     ])
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     obtenerInscripciones(): Observable<Inscripciones[]> {
-        return this.inscripciones$.asObservable();
+        return this.http.get<Inscripciones[]>(`${enviroment.apiBaseUrl}/inscripciones`)
     }
 
     obtenerInscripcionesPorId(id: number): Observable<Inscripciones | undefined> {

@@ -11,8 +11,8 @@ import { FontSizeDirective } from './font-size.directive';
   imports: [
     CommonModule
   ],
- exports: [
-  FontSizeDirective
- ]
+  exports: [
+    FontSizeDirective
+  ]
 })
 export class DirectivesModule { }

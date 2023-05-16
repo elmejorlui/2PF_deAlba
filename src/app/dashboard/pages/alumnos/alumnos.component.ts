@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AbmAlumnosComponent } from './abm-alumnos/abm-alumnos.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlumnosService } from './componentes/services/alumnos.service';
 import { Alumno } from '../alumnos/componentes/models/index';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/environments/environments';
 
 
 @Component({
@@ -26,10 +27,10 @@ export class AlumnosComponent {
   constructor(private matDialog: MatDialog,
     private router: Router,
     private activatesRoute: ActivatedRoute,
-    private alumnosService: AlumnosService
+    private http: HttpClient
   ) {
 
-    this.alumnosService.obtenerAlumnos()
+    this.http.get<Alumno[]>(`${enviroment.apiBaseUrl}/alumnos`)
       .subscribe((alumnos) => {
         this.dataSource.data = alumnos;
       })

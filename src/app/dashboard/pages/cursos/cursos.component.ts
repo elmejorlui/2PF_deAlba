@@ -20,8 +20,9 @@ export class CursosComponent implements OnInit {
     private router: Router,
     private activatesRoute: ActivatedRoute,
     private cursosService: CursosService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+  ) {
+  }
 
   abrirDetallesCurso(cursoId: number): void {
     this.router.navigate([cursoId], {
