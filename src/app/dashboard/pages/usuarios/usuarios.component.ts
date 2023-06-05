@@ -17,11 +17,6 @@ import { State } from './store/usuarios.reducer';
 export class UsuariosComponent implements OnInit {
   data: Observable<any[]>;
 
-  aplicarFiltros(ev: Event): void {
-    const inputValue = (ev.target as HTMLInputElement)?.value;
-    this.dataSource.filter = inputValue?.trim()?.toLowerCase();
-  }
-
   constructor(
     private usuariosService: UsuarioService,
     private matDialog: MatDialog,

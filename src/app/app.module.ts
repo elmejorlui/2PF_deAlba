@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -6,6 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './dashboard/pages/cursos/cursos.module';
+import { StoreModule } from '@ngrx/store';
+import { actionReducerMap } from './store.ts';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -13,12 +17,14 @@ import { CursosModule } from './dashboard/pages/cursos/cursos.module';
   ],
   imports: [
     BrowserModule,
-    // DashboardModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
     AppRoutingModule,
-    CursosModule
+    CursosModule,
+    StoreModule.forRoot(actionReducerMap, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
