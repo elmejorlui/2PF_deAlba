@@ -6,6 +6,6 @@ export interface Inscripciones {
   alumnoId: number;
   cursoId: number;
   fecha_inscripcion: string;
-  alumno?: Alumno;
-  curso?: Curso;
+  alumno?: string;
+  curso?: string;
 }

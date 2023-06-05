@@ -24,10 +24,8 @@
       "nombre": "Victorine",
       "apellido": "Vilmantė",
       "correo": "victorine@mail.com",
-      "curso": [
-        "Angular"
-      ],
       "pais": "Argentina",
+      "fecha_registro": "2023-06-05T17:24:58.465Z",
       "id": 1
     },
     {
@@ -89,48 +87,114 @@
       "fecha_inicio": "2023-06-04T06:00:00.000Z",
       "fecha_fin": "2023-06-29T06:00:00.000Z",
       "id": 3
+    },
+    {
+      "nombre": "JavaScript",
+      "fecha_inicio": "2023-06-01T06:00:00.000Z",
+      "fecha_fin": "2023-06-30T06:00:00.000Z",
+      "id": 4
+    },
+    {
+      "nombre": "PHP",
+      "fecha_inicio": "2023-06-01T06:00:00.000Z",
+      "fecha_fin": "2023-06-30T06:00:00.000Z",
+      "id": 5
+    },
+    {
+      "nombre": "Python",
+      "fecha_inicio": "2023-06-01T06:00:00.000Z",
+      "fecha_fin": "2023-06-30T06:00:00.000Z",
+      "id": 6
     }
   ],
   "inscripciones": [
     {
       "id": 1,
       "alumnoId": 1,
-      "cursoId": 1,
+      "cursoId": 2,
       "alumno": "Victorine",
-      "curso": "Angular",
+      "curso": "React",
       "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
     },
     {
       "id": 2,
-      "alumnoId": 1,
+      "alumnoId": 2,
       "cursoId": 2,
-      "alumno": "Victorine",
+      "alumno": "Alhaji",
       "curso": "React",
       "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
     },
     {
-      "id": 4,
-      "alumnoId": 2,
+      "alumnoId": 6,
       "cursoId": 1,
-      "alumno": "Alhaji",
+      "alumno": "Juan",
       "curso": "Angular",
-      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+      "fecha_inscripcion": "2023-06-29T06:00:00.000Z",
+      "id": 3
     },
     {
-      "id": 5,
-      "alumnoId": 2,
-      "cursoId": 2,
-      "alumno": "Alhaji",
-      "curso": "React",
-      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+      "alumnoId": 3,
+      "cursoId": 3,
+      "alumno": "Edurne",
+      "curso": "Android",
+      "fecha_inscripcion": "2023-06-30T06:00:00.000Z",
+      "id": 4
     },
     {
-      "id": 7,
       "alumnoId": 4,
-      "cursoId": 1,
+      "cursoId": 4,
       "alumno": "Klava",
-      "curso": "Angular",
-      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+      "curso": "JavaScript",
+      "fecha_inscripcion": "2023-06-01T06:00:00.000Z",
+      "id": 5
+    },
+    {
+      "alumnoId": 5,
+      "cursoId": 5,
+      "alumno": "Geetha",
+      "curso": "PHP",
+      "fecha_inscripcion": "2023-06-01T06:00:00.000Z",
+      "id": 6
+    },
+    {
+      "alumnoId": 1,
+      "cursoId": 6,
+      "alumno": "Victorine",
+      "curso": "Python",
+      "fecha_inscripcion": "2023-06-02T06:00:00.000Z",
+      "id": 7
+    },
+    {
+      "alumnoId": 2,
+      "cursoId": 3,
+      "alumno": "Alhaji",
+      "curso": "Android",
+      "fecha_inscripcion": "2023-06-03T06:00:00.000Z",
+      "id": 8
+    },
+    {
+      "alumnoId": 3,
+      "cursoId": 4,
+      "alumno": "Edurne",
+      "curso": "JavaScript",
+      "fecha_inscripcion": "2023-06-04T06:00:00.000Z",
+      "id": 9
+    },
+    {
+      "alumnoId": 4,
+      "cursoId": 5,
+      "alumno": "Klava",
+      "curso": "PHP",
+      "fecha_inscripcion": "2023-06-05T06:00:00.000Z",
+      "id": 10
+    },
+    {
+      "alumnoId": 5,
+      "cursoId": 2,
+      "alumno": "Geetha",
+      "curso": "React",
+      "fecha_inscripcion": "2023-06-29T06:00:00.000Z",
+      "id": 11
     }
   ]
 }

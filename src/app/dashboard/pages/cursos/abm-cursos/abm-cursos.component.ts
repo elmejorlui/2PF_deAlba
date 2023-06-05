@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, FormRecord, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./abm-cursos.component.scss'],
 })
 export class AbmCursosComponent {
-  nombreControl = new FormControl('', [Validators.required, Validators.minLength(3),]);
+  nombreControl = new FormControl('', [Validators.required]);
   fechaInicioControl = new FormControl('', [Validators.required]);
   fechaFinControl = new FormControl('', [Validators.required]);
 

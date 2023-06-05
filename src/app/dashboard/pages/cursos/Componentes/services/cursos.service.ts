@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, take } from 'rxjs';
-import { CrearCursoPayload, Curso } from '../models';
+import { Observable } from 'rxjs';
+import { Curso } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/environments/environments';
 
@@ -14,6 +14,10 @@ export class CursosService {
 
   obtenerCursos(): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${enviroment.apiBaseUrl}/cursos`)
+  }
+
+  obtenerCursoPorId(cursoId: number): Observable<Curso | undefined> {
+    return this.http.get<Curso>(`${this.baseUrl}/${cursoId}`);
   }
 
   crearCurso(curso: Curso): Observable<Curso> {

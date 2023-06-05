@@ -2,25 +2,30 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Inscripciones } from './componentes/models';
-import { InscripcionesService } from './componentes/services/cursos.service';
+import { InscripcionesService } from './componentes/services/inscripciones.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { AlumnosService } from '../alumnos/componentes/services/alumnos.service';
-import { CursosService } from '../cursos/Componentes/services/cursos.service';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/core/models';
 import { AbmInscripcionesComponent } from './abm-inscripciones/abm-inscripciones.component';
-import { Curso } from '../cursos/Componentes/models';
+import { enviroment } from 'src/environments/environments';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-inscripciones',
   templateUrl: './inscripciones.component.html',
-  styleUrls: ['./inscripciones.component.scss']
+  styleUrls: ['./inscripciones.component.scss'],
 })
 export class InscripcionesComponent {
   dataSource = new MatTableDataSource<Inscripciones>();
   authUser$: Observable<Usuario | null>;
   role: string | null | undefined;
-  displayedColumns: string[] = ['id', 'alumno', 'curso', 'fecha_inicio', 'acciones']
+  displayedColumns: string[] = [
+    'id',
+    'alumno',
+    'curso',
+    'fecha_inicio',
+    'acciones',
+  ];
 
   aplicarFiltros(ev: Event): void {
     const inputValue = (ev.target as HTMLInputElement)?.value;
@@ -31,8 +36,7 @@ export class InscripcionesComponent {
     private matDialog: MatDialog,
     private inscripcionesService: InscripcionesService,
     private authService: AuthService,
-    private alumnosService: AlumnosService,
-    private cursosService: CursosService
+    private http: HttpClient
   ) {
     this.authUser$ = this.authService.obtenerUsuarioAutenticado();
   }
@@ -42,9 +46,14 @@ export class InscripcionesComponent {
 
     dialogRef.afterClosed().subscribe((nuevaInscripcion) => {
       if (nuevaInscripcion) {
-        this.inscripcionesService.guardarInscripcion(nuevaInscripcion).subscribe((inscripcionGuardada) => {
-          this.dataSource.data = [...this.dataSource.data, inscripcionGuardada];
-        });
+        this.http
+          .post<Inscripciones>(
+            enviroment.apiBaseUrl + '/inscripciones',
+            nuevaInscripcion
+          )
+          .subscribe((nuevaInscripcion: Inscripciones) => {
+            this.dataSource.data = [...this.dataSource.data, nuevaInscripcion];
+          });
       }
     });
   }
@@ -54,20 +63,11 @@ export class InscripcionesComponent {
     this.authUser$.subscribe((user) => {
       this.role = user?.role;
     });
-    this.inscripcionesService.obtenerInscripciones().subscribe((inscripciones) => {
-      this.dataSource.data = inscripciones;
-      for (const inscripcion of inscripciones) {
-        this.alumnosService.obtenerAlumnoPorId(inscripcion.alumnoId).subscribe((alumno) => {
-          inscripcion.alumno = alumno;
-        });
-        this.cursosService.obtenerCursos().subscribe((cursos: Curso[]) => {
-          const cursoEncontrado = cursos.find(curso => curso.id === inscripcion.cursoId);
-          if (cursoEncontrado) {
-            inscripcion.curso = cursoEncontrado;
-          }
-        });
-      }
-    });
+    this.inscripcionesService
+      .obtenerInscripciones()
+      .subscribe((inscripciones) => {
+        this.dataSource.data = inscripciones;
+      });
   }
 
   eliminarInscripcion(inscripcionId: number): void {
@@ -75,14 +75,17 @@ export class InscripcionesComponent {
       return;
     }
 
-    this.inscripcionesService.eliminarInscripcion(inscripcionId).subscribe(() => {
-      const updatedData = this.dataSource.data.filter((inscripcion) => inscripcion.id !== inscripcionId);
-      this.dataSource.data = updatedData;
-    });
+    this.inscripcionesService
+      .eliminarInscripcion(inscripcionId)
+      .subscribe(() => {
+        const updatedData = this.dataSource.data.filter(
+          (inscripcion) => inscripcion.id !== inscripcionId
+        );
+        this.dataSource.data = updatedData;
+      });
   }
 
   isAdminUser(): boolean {
     return this.role === 'admin';
   }
-
 }
