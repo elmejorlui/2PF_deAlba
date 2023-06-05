@@ -1,12 +1,16 @@
 export interface Usuario {
   id: number;
   nombre: string;
-  correo: string;
-  contrasena: string;
+  apellido: string;
+  email: string;
+  password: string;
+  token?: string;
+  role: string;
 }
 
 export interface CrearUsuarioPayload {
   nombre: string;
-  correo: string;
-  contrasena: string;
+  email: string;
+  password: string;
+  role: string;
 }

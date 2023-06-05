@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { usuarioService } from './componentes/usuarios.service';
-import { AbmUsuariosComponent } from './abm-usuarios/abm-usuarios.component';
-import { Usuario } from './componentes/models/indesx';
-import { Observable, map } from 'rxjs';
-import { UsuariosActions } from './store/usuarios.actions';
 import { MatDialog } from '@angular/material/dialog';
+import { UsuarioService } from './componentes/usuarios.service';
+import { Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { selectUsuariosState } from './store/usuarios.selector';
+import { UsuariosActions } from './store/usuarios.actions';
+import { AbmUsuariosComponent } from './abm-usuarios/abm-usuarios.component';
+import { State } from './store/usuarios.reducer';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -14,12 +15,16 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  dataSource = new MatTableDataSource();
-  displayedColumns = ['id', 'nombre', 'correo', 'contrasena', 'acciones'];
+  data: Observable<any[]>;
+
+  aplicarFiltros(ev: Event): void {
+    const inputValue = (ev.target as HTMLInputElement)?.value;
+    this.dataSource.filter = inputValue?.trim()?.toLowerCase();
+  }
 
   constructor(
-    private usuariosService: usuarioService,
-    private dialog: MatDialog,
+    private usuariosService: UsuarioService,
+    private matDialog: MatDialog,
     private store: Store<{ usuarios: State }>
   ) {
     this.data = this.store.select(selectUsuariosState).pipe(
@@ -32,17 +37,11 @@ export class UsuariosComponent implements OnInit {
   }
 
   eliminarUsuarioporId(id: number): void {
-    this.store.dispatch(UsuariosActions.deleteUsuarios({id}));
+    this.store.dispatch(UsuariosActions.deleteUsuarios({ id }));
   }
 
   crearUsuario(): void {
-    this.dialog.open(AbmUsuariosComponent)
-  }
-
-  aplicarFiltros(ev: Event): void {
-    const inputValue = (ev.target as HTMLInputElement)?.value;
-    this.dataSource.filter = inputValue?.trim()?.toLowerCase();
+    this.matDialog.open(AbmUsuariosComponent)
   }
 
 }
-

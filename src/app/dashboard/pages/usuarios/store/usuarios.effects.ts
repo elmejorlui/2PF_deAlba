@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { UsuariosActions } from './usuarios.actions';
-import { CursosService } from '../../cursos/Componentes/services/cursos.service';
-import { usuarioService } from '../componentes/usuarios.service';
+import { UsuarioService } from '../componentes/usuarios.service';
 
 
 @Injectable()
@@ -49,5 +48,5 @@ export class UsuariosEffects {
     })
 
 
-    constructor(private actions$: Actions, private usuarioService: usuarioService) { }
+    constructor(private actions$: Actions, private usuarioService: UsuarioService) { }
 }

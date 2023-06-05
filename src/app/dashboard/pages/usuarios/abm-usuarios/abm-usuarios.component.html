@@ -1,42 +1,43 @@
-<h1 mat-dialog-title>ABM Usuarios</h1>
+<h3 mat-dialog-title>AGREGAR USUARIO</h3>
 <div mat-dialog-content>
-  <form class="formulario-usuario">
-    <table class="width" cellspacing="0">
-      <td>
-        <mat-form-field class="width">
-          <mat-label>Nombre</mat-label>
-          <input matInput [ngClass]="{ 'is-invalid': nombreControl.invalid && nombreControl.touched}"
-            [formControl]="nombreControl" class="form-control" />
-          <div *ngIf="nombreControl.hasError('required') && nombreControl.touched" class="invalid-feedback">
-            Este campo es obligatorio
-          </div>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="width">
-          <mat-label>Correo</mat-label>
-          <input matInput [ngClass]="{ 'is-invalid': correoControl.invalid && correoControl.touched}"
-            [formControl]="correoControl" class="form-control" />
-          <div *ngIf="correoControl.hasError('required') && correoControl.touched" class="invalid-feedback">
-            Este campo es obligatorio
-          </div>
-        </mat-form-field>
-      </td>
-        <td>
-      </table>
-      <mat-form-field >
-        <mat-label>Contrasena</mat-label>
-        <input matInput [ngClass]="{ 'is-invalid': contrasenaControl.invalid && contrasenaControl.touched}"
-          [formControl]="contrasenaControl" class="form-control" />
-        <div *ngIf="contrasenaControl.hasError('required') && contrasenaControl.touched" class="invalid-feedback">
-          Este campo es obligatorio
-        </div>
+  <form [formGroup]="usuarioForm">
+    <div>
+      <mat-form-field class="width">
+        <mat-label>Nombre</mat-label>
+        <input matInput [formControl]="nombreControl" class="form-control" />
       </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width">
+        <mat-label>Apellido</mat-label>
+        <input matInput [formControl]="apellidoControl" class="form-control" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width">
+        <mat-label>Correo</mat-label>
+        <input matInput [formControl]="correoControl" class="form-control" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width">
+        <mat-label>Pasword</mat-label>
+        <input matInput [formControl]="contrasenaControl" class="form-control" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width">
+        <mat-label>Rol</mat-label>
+        <mat-select [formControl]="roleControl" class="form-control">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="user">User</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
   </form>
-
-  <div mat-dialog-action>
-    <button mat-dialog-close class="button-row" mat-raised-button color="warn">Cancelar</button>
-    <button (click)="guardar()" class="button-row" mat-raised-button color="primary">Guardar</button>
-  </div>
-
+</div>
+<div mat-dialog-actions>
+  <button mat-dialog-close mat-button type="button">Cancelar</button>
+  <button (click)="onSave()" mat-button type="button">Guardar</button>
 </div>

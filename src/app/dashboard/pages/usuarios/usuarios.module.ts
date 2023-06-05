@@ -16,6 +16,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { UsuariosEffects } from './store/usuarios.effects';
+import { usuariosFeature } from './store/usuarios.reducer';
+import { StoreModule } from '@ngrx/store';
 
 
 
@@ -43,12 +47,15 @@ import { RouterModule } from '@angular/router';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    StoreModule.forFeature(usuariosFeature),
     RouterModule.forChild([
       {
         path: '',
         component: UsuariosComponent
       }
     ]),
+    EffectsModule.forFeature([UsuariosEffects]),
   ]
 })
+
 export class UsuariosModuleTsModule { }
