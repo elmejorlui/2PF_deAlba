@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AbmAlumnosComponent } from './abm-alumnos/abm-alumnos.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from '../alumnos/componentes/models/index';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { enviroment } from 'src/environments/environments';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Usuario } from 'src/app/core/models';
@@ -68,8 +68,15 @@ export class AlumnosComponent {
 
   deleteAlumno(alumnoForDelete: Alumno): void {
     if (confirm("Esta seguro de borrar?")) {
-      this.dataSource.data = this.dataSource.data.filter(
-        (alumnoActual) => alumnoActual.id !== alumnoForDelete.id,
+      const url = `${enviroment.apiBaseUrl}/alumnos/${alumnoForDelete.id}`;
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+      this.http.delete(url, { headers }).subscribe(
+        () => {
+          this.dataSource.data = this.dataSource.data.filter(
+            (alumnoActual) => alumnoActual.id !== alumnoForDelete.id
+          );
+        },
       );
     }
   }
@@ -82,10 +89,19 @@ export class AlumnosComponent {
     })
     dialog.afterClosed().subscribe((dataDelAlumnoEditado) => {
       if (dataDelAlumnoEditado) {
-        this.dataSource.data = this.dataSource.data.map(
-          (alumnoActual) => alumnoActual.id === alumnoParaEditar.id
-            ? ({ ...alumnoActual, ...dataDelAlumnoEditado })
-            : alumnoActual,
+        const url = `${enviroment.apiBaseUrl}/alumnos/${alumnoParaEditar.id}`;
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        this.http.put(url, dataDelAlumnoEditado, { headers }).subscribe(
+          () => {
+            const index = this.dataSource.data.findIndex(
+              (alumnoActual) => alumnoActual.id === alumnoParaEditar.id
+            );
+            if (index !== -1) {
+              this.dataSource.data[index] = { ...alumnoParaEditar, ...dataDelAlumnoEditado };
+              this.dataSource = new MatTableDataSource(this.dataSource.data);
+            }
+          },
         );
       }
     })

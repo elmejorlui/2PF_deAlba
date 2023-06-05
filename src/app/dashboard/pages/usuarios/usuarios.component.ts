@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import { usuarioService } from './componentes/usuarios.service';
 import { AbmUsuariosComponent } from './abm-usuarios/abm-usuarios.component';
 import { Usuario } from './componentes/models/indesx';
-
+import { Observable, map } from 'rxjs';
+import { UsuariosActions } from './store/usuarios.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-usuarios',
@@ -17,46 +19,24 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuariosService: usuarioService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private store: Store<{ usuarios: State }>
+  ) {
+    this.data = this.store.select(selectUsuariosState).pipe(
+      map((state: State) => state.usuarios)
+    );
+  }
 
   ngOnInit(): void {
-    this.usuariosService.obtenerUsuarios().subscribe({
-      next: (usuarios) => {
-        this.dataSource.data = usuarios;
-      },
-    });
+    this.store.dispatch(UsuariosActions.loadUsuarios());
+  }
+
+  eliminarUsuarioporId(id: number): void {
+    this.store.dispatch(UsuariosActions.deleteUsuarios({id}));
   }
 
   crearUsuario(): void {
-    const dialog = this.dialog.open(AbmUsuariosComponent);
-
-    dialog.afterClosed()
-      .subscribe((formValue) => {
-        if (formValue) {
-          this.usuariosService.crearUsuario(formValue)
-        }
-      });
-  }
-
-  editarUsuario(usuario: Usuario): void {
-    const dialog = this.dialog.open(AbmUsuariosComponent, {
-      data: {
-        usuario,
-      }
-    })
-
-    dialog.afterClosed()
-      .subscribe((formValue) => {
-        if (formValue) {
-          this.usuariosService.editarUsuario(usuario.id, formValue);
-        }
-      })
-  }
-
-  eliminarUsuario(usuario: Usuario): void {
-    if (confirm('Esta Seguro?'))
-      this.usuariosService.eliminarUsuario(usuario.id);
+    this.dialog.open(AbmUsuariosComponent)
   }
 
   aplicarFiltros(ev: Event): void {

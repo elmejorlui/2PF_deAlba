@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Inscripciones } from '../models/index';
-import { BehaviorSubject, Observable, map, } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { enviroment } from 'src/environments/environments';
 import { HttpClient } from '@angular/common/http';
+
+
+const baseUrl = `${enviroment.apiBaseUrl}/inscripciones`;
 
 @Injectable({
     providedIn: 'root'
@@ -10,105 +13,59 @@ import { HttpClient } from '@angular/common/http';
 
 export class InscripcionesService {
 
-    private inscripciones$ = new BehaviorSubject<Inscripciones[]>([
-        {
-            id: 1,
-            alumnoId: 1,
-            cursoId: 1,
-            alumno: 'Victorine',
-            curso: 'Angular',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 2,
-            alumnoId: 1,
-            cursoId: 2,
-            alumno: 'Victorine',
-            curso: 'React',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 3,
-            alumnoId: 1,
-            cursoId: 3,
-            alumno: 'Victorine',
-            curso: 'Android',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 4,
-            alumnoId: 2,
-            cursoId: 1,
-            alumno: 'Alhaji',
-            curso: 'Angular',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 5,
-            alumnoId: 2,
-            cursoId: 2,
-            alumno: 'Alhaji',
-            curso: 'React',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 6,
-            alumnoId: 3,
-            cursoId: 3,
-            alumno: 'Edurne',
-            curso: 'Android',
-            fecha_inicio: new Date(),
-        },
-        {
-            id: 7,
-            alumnoId: 4,
-            cursoId: 1,
-            alumno: 'Klava',
-            curso: 'Angular',
-            fecha_inicio: new Date(),
-          },
-          {
-            id: 8,
-            alumnoId: 5,
-            cursoId: 1,
-            alumno: 'Geetha',
-            curso: 'Angular',
-            fecha_inicio: new Date(),
-          },
-          {
-            id: 9,
-            alumnoId: 6,
-            cursoId: 3,
-            alumno: 'Dayton',
-            curso: 'Android',
-            fecha_inicio: new Date(),
-          },
-    ])
+    private inscripciones$: BehaviorSubject<Inscripciones[]> = new BehaviorSubject<Inscripciones[]>([]);
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.fetchInscripciones();
+    }
 
     obtenerInscripciones(): Observable<Inscripciones[]> {
-        return this.http.get<Inscripciones[]>(`${enviroment.apiBaseUrl}/inscripciones`)
+        return this.inscripciones$.asObservable();
     }
 
-    obtenerInscripcionesPorId(id: number): Observable<Inscripciones | undefined> {
-        return this.inscripciones$.asObservable()
-            .pipe(
-                map((inscripciones) => inscripciones.find((a) => a.id === id))
-            )
+    private fetchInscripciones() {
+        this.http
+            .get<Inscripciones[]>(baseUrl)
+            .subscribe((inscripciones) => {
+                this.inscripciones$.next(inscripciones);
+            });
     }
 
-    obtenerInscripcionesPorAlumnoId(id: number): Observable<Inscripciones | undefined> {
-        return this.inscripciones$.asObservable()
-            .pipe(
-                map((inscripciones) => inscripciones.find((a) => a.alumnoId === id))
-            )
+    obtenerInscripcionPorId(id: number): Observable<Inscripciones | undefined> {
+        return this.inscripciones$.asObservable().pipe(
+            map((inscripciones) => inscripciones.find((a: Inscripciones) => a.id === id))
+        );
     }
 
-    obtenerInscripcionesPorCursoId(id: number): Observable<Inscripciones | undefined> {
-        return this.inscripciones$.asObservable()
-            .pipe(
-                map((inscripciones) => inscripciones.find((a) => a.cursoId === id))
-            )
+    obtenerInscripcionesPorAlumnoId(id: number): Observable<Inscripciones[]> {
+        return this.inscripciones$.asObservable().pipe(
+            map((inscripciones) => inscripciones.filter((a: Inscripciones) => a.alumnoId === id))
+        );
+    }
+
+    obtenerInscripcionesPorCursoId(id: number): Observable<Inscripciones[]> {
+        return this.inscripciones$.asObservable().pipe(
+            map((inscripciones) => inscripciones.filter((a: Inscripciones) => a.cursoId === id))
+        );
+    }
+
+    eliminarInscripcion(id: number): Observable<void> {
+        const url = `${baseUrl}/${id}`;
+        return this.http.delete<void>(url).pipe(
+            tap(() => {
+                this.inscripciones$.next(this.inscripciones$.value.filter(i => i.id !== id));
+            })
+        );
+    }
+
+    guardarInscripcion(inscripcion: Inscripciones): Observable<Inscripciones> {
+        return this.http.post<Inscripciones>(baseUrl, inscripcion).pipe(
+            map((savedInscripcion) => {
+                const inscripciones = this.inscripciones$.value;
+                inscripciones.push(savedInscripcion);
+                this.inscripciones$.next(inscripciones);
+                return savedInscripcion;
+            })
+        );
     }
 }

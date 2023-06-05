@@ -36,20 +36,6 @@
     <table class="width" cellspacing="0">
       <td>
         <mat-form-field class="width">
-          <mat-label>Selecciona tu curso </mat-label>
-          <mat-select multiple [ngClass]="{ 'is-invalid': nombreControl.invalid && nombreControl.touched}"
-            [formControl]="cursoControl" class="form-control">
-            <mat-option value="Angular">Angular</mat-option>
-            <mat-option value="React">React</mat-option>
-            <mat-option value="Asado Profecional">Asado Profecional</mat-option>
-          </mat-select>
-          <div *ngIf="cursoControl.hasError('required') && cursoControl.touched" class="invalid-feedback">
-            Este campo es obligatorio
-          </div>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="width">
           <mat-label>Pais </mat-label>
           <input matInput [ngClass]="{ 'is-invalid': paisControl.invalid && paisControl.touched}"
             [formControl]="paisControl" class="form-control">

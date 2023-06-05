@@ -21,12 +21,14 @@
   ],
   "alumnos": [
     {
-      "id": 1,
       "nombre": "Victorine",
       "apellido": "Vilmantė",
       "correo": "victorine@mail.com",
+      "curso": [
+        "Angular"
+      ],
       "pais": "Argentina",
-      "fecha_registro": "2023-04-27T01:27:59.631Z"
+      "id": 1
     },
     {
       "id": 2,
@@ -61,20 +63,20 @@
       "fecha_registro": "2023-04-27T01:27:59.631Z"
     },
     {
-      "id": 6,
-      "nombre": "Dayton",
-      "apellido": "Geboom",
-      "correo": "daytong@mail.com",
-      "pais": "Peru",
-      "fecha_registro": "2023-04-27T01:27:59.631Z"
+      "nombre": "Juan",
+      "apellido": "Pablo",
+      "correo": "juanpa@correo.com",
+      "pais": "Australia",
+      "fecha_registro": "2023-06-04T23:57:05.209Z",
+      "id": 6
     }
   ],
   "cursos": [
     {
-      "id": 1,
       "nombre": "Angular",
       "fecha_inicio": "2023-04-27T01:27:59.631Z",
-      "fecha_fin": "2023-04-27T01:27:59.631Z"
+      "fecha_fin": "2023-04-27T01:27:59.631Z",
+      "id": 1
     },
     {
       "id": 2,
@@ -83,10 +85,10 @@
       "fecha_fin": "2023-04-27T01:27:59.631Z"
     },
     {
-      "id": 3,
       "nombre": "Android",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z",
-      "fecha_fin": "2023-04-27T01:27:59.631Z"
+      "fecha_inicio": "2023-06-04T06:00:00.000Z",
+      "fecha_fin": "2023-06-29T06:00:00.000Z",
+      "id": 3
     }
   ],
   "inscripciones": [
@@ -96,71 +98,39 @@
       "cursoId": 1,
       "alumno": "Victorine",
       "curso": "Angular",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
+      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+    },
+    {
       "id": 2,
       "alumnoId": 1,
       "cursoId": 2,
       "alumno": "Victorine",
       "curso": "React",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
-      "id": 3,
-      "alumnoId": 1,
-      "cursoId": 3,
-      "alumno": "Victorine",
-      "curso": "Android",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
+      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+    },
+    {
       "id": 4,
       "alumnoId": 2,
       "cursoId": 1,
       "alumno": "Alhaji",
       "curso": "Angular",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
+      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+    },
+    {
       "id": 5,
       "alumnoId": 2,
       "cursoId": 2,
       "alumno": "Alhaji",
       "curso": "React",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
-      "id": 6,
-      "alumnoId": 3,
-      "cursoId": 3,
-      "alumno": "Edurne",
-      "curso": "Android",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-  },
-  {
+      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
+    },
+    {
       "id": 7,
       "alumnoId": 4,
       "cursoId": 1,
       "alumno": "Klava",
       "curso": "Angular",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-    },
-    {
-      "id": 8,
-      "alumnoId": 5,
-      "cursoId": 1,
-      "alumno": "Geetha",
-      "curso": "Angular",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
-    },
-    {
-      "id": 9,
-      "alumnoId": 6,
-      "cursoId": 3,
-      "alumno": "Dayton",
-      "curso": "Android",
-      "fecha_inicio": "2023-04-27T01:27:59.631Z"
+      "fecha_inscripcion": "2023-04-27T01:27:59.631Z"
     }
   ]
 }

@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Usuario } from 'src/app/core/models';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/environments/environments';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class CursosComponent implements OnInit {
     private activatesRoute: ActivatedRoute,
     private cursosService: CursosService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.authUser$ = this.authService.obtenerUsuarioAutenticado();
   }
@@ -51,7 +54,9 @@ export class CursosComponent implements OnInit {
     dialog.afterClosed()
       .subscribe((formValue) => {
         if (formValue) {
-          this.cursosService.crearCurso(formValue)
+          this.http.post<Curso>(enviroment.apiBaseUrl + '/cursos', formValue).subscribe((nuevoCurso: Curso) => {
+            this.dataSource.data = [...this.dataSource.data, nuevoCurso];
+          });
         }
       });
   }
@@ -59,21 +64,29 @@ export class CursosComponent implements OnInit {
   editarCurso(curso: Curso): void {
     const dialog = this.dialog.open(AbmCursosComponent, {
       data: {
-        curso,
-      }
-    })
+        curso: curso,
+      },
+    });
 
-    dialog.afterClosed()
-      .subscribe((formValue) => {
-        if (formValue) {
-          this.cursosService.editarCurso(curso.id, formValue);
-        }
-      })
+    dialog.afterClosed().subscribe((dataDelCursoEditado) => {
+      if (dataDelCursoEditado) {
+        const url = `${enviroment.apiBaseUrl}/cursos/${curso.id}`;
+        this.http.put(url, dataDelCursoEditado).subscribe(() => {
+          const index = this.dataSource.data.findIndex((c: any) => c.id === curso.id);
+          if (index !== -1) {
+            this.dataSource.data[index] = { ...curso, ...dataDelCursoEditado };
+            this.dataSource = new MatTableDataSource(this.dataSource.data);
+          }
+        });
+      }
+    });
   }
 
   eliminarCurso(curso: Curso): void {
     if (confirm('Esta Seguro?'))
-      this.cursosService.eliminarCurso(curso.id);
+    this.cursosService.eliminarCurso(curso.id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter((c: any) => c.id !== curso.id);
+    });
   }
 
   aplicarFiltros(ev: Event): void {
