@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UsuarioService } from './componentes/usuarios.service';
 import { Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectUsuariosState } from './store/usuarios.selector';
@@ -18,7 +17,6 @@ export class UsuariosComponent implements OnInit {
   data: Observable<any[]>;
 
   constructor(
-    private usuariosService: UsuarioService,
     private matDialog: MatDialog,
     private store: Store<{ usuarios: State }>
   ) {

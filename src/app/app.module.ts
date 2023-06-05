@@ -6,10 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './dashboard/pages/cursos/cursos.module';
-import { StoreModule } from '@ngrx/store';
-import { actionReducerMap } from './store.ts';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter.reducer';
 
 @NgModule({
   declarations: [
@@ -22,9 +22,10 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     AppRoutingModule,
     CursosModule,
-    StoreModule.forRoot(actionReducerMap, {}),
+    StoreModule.forRoot({ count: counterReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot(),
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

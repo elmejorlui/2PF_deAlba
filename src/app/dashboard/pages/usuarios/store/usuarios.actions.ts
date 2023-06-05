@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { CrearUsuarioPayload, Usuario } from '../componentes/models/indesx';
+import { Usuario } from '../componentes/models/indesx';
 
 export const UsuariosActions = createActionGroup({
     source: 'Usuarios',
